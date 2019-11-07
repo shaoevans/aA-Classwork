@@ -1,9 +1,9 @@
 
 module Slideable
-  def moves(symbol)
+  def moves
     x, y = @position[0], @position[1]
     results = []
-    case symbol
+    case move_dirs
     when :diagonal
       diagonals
     when :horizontal
@@ -37,37 +37,49 @@ module Slideable
   end
 end
 
-module Steppable
-  def moves
-  end
+module Stepable
 end
 
 class Piece
+  attr_reader :symbol
   def initialize(position, color, board)
     @position = position
-    @color = color
+    @symbol = color
     @board = board
   end
 end
 
-class SlidingPiece < Piece
+class Rook < Piece
   include Slideable
-  
   def move_dirs
-    case @symbol
-    when :bishop
-      :diagonal
-    when :queen
-      :both
-    when :rook
-      :horizontal
-    end
+    :horizontal
   end
 end
 
-class SteppingPiece < Piece
-  include Steppable
+class Queen < Piece
+  include Slideable
+  def move_dirs
+    :both
+  end
 end
+
+class Bishop < Piece
+  include Slideable
+  def move_dirs
+    :diagonal
+  end
+end
+
+class Knight < Piece
+  include Stepable
+end
+
+class King < Piece
+  include Stepable
+end
+
+
+
 
 class NullPiece < Piece 
   include Singleton
