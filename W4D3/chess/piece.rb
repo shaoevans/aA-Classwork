@@ -3,7 +3,6 @@ require "singleton"
 module Slideable
   def moves
     x, y = @position[0], @position[1]
-    results = []
     case move_dirs
     when :diagonal
       diagonals
@@ -12,7 +11,6 @@ module Slideable
     when :both
       horizontals + diagonals
     end
-    results
   end
 
   def diagonals
@@ -26,12 +24,13 @@ module Slideable
   def grow_unblocked_moves_in_dir(dx,dy)
     result = []
     x,y = self.position
-    current_pos = [x + dx, x + dy]
-    until @board[current_pos].symbol != :red || !@board.valid_pos?(current_pos)
+    current_pos = [x + dx, y + dy]
+    until  !@board.valid_pos?(current_pos) || @board[current_pos].symbol != :green
       result << current_pos
-      current_pos = [x + dx, x + dy]
+      x, y = current_pos
+      current_pos = [x + dx, y + dy]
     end
-    if @board[current_pos].symbol == @symbol || !@board.valid_pos?(current_pos)
+    if !@board.valid_pos?(current_pos) || @board[current_pos].symbol == @symbol  
       return result
     else
       result << current_pos
@@ -47,7 +46,8 @@ module Stepable
 end
 
 class Piece
-  attr_reader :symbol, :position
+  attr_reader :symbol
+  attr_accessor :position
   def initialize(position, color, board)
     @position = position
     @symbol = color
@@ -158,8 +158,12 @@ class NullPiece < Piece
 end
 
 class Pawn < Piece
+
+  def moves
+    forward_steps + side_attacks
+  end
   def at_start_row?
-    @color == :black && @position[0] == 1 || @color == :white && @position[0] == 6
+    @symbol == :black && @position[0] == 1 || @symbol  == :white && @position[0] == 6
   end
 
   def to_s
@@ -167,7 +171,7 @@ class Pawn < Piece
   end
 
   def forward_dir
-    if @color == :black 
+    if @symbol == :black 
       1
     else
       -1
@@ -177,15 +181,18 @@ class Pawn < Piece
   def forward_steps
     x,y = @position
     dx = self.forward_dir
-
-    if !@board[x + dx].is_a?(NullPiece)
+    if !@board[[x + dx, y]].is_a?(NullPiece)
       return []
-    elsif self.at_start_row? && @board[x + dir + dir].is_a?(NullPiece)
+    elsif self.at_start_row? && @board[[x + dx + dx,y]].is_a?(NullPiece)
       return [[x+dx, y], [x+(dx*2), y]]
     else
       return [[x+dx, y]]
     end
 
+  end
+
+  def other_color(color)
+    (color == :black) ? :white : :black
   end
 
   def side_attacks
@@ -194,14 +201,13 @@ class Pawn < Piece
     dir = self.forward_dir 
     possible_attacks = []
 
-    if @board[x + dir, y + 1].symbol != @symbol && y+1 <= 7
+    if y+1 <= 7 && @board[[x + dir, y + 1]].symbol == other_color(@symbol)
       possible_attacks << [x + dir, y + 1]
     end 
 
-    if @board[x + dir, y - 1].symbol != @symbol && y-1 >= 0
+    if y-1 >= 0 && @board[[x + dir, y - 1]].symbol == other_color(@symbol)
       possible_attacks << [x + dir, y - 1]
     end 
-      
-    return possible_attacks
+    possible_attacks
   end
 end

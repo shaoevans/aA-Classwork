@@ -40,15 +40,15 @@ class Board
   end
 
   def move_piece!(start_pos,end_pos)
-    row, column = start_pos[0], start_pos[1]
-    if @grid[row][column].nil?
+    x, y = start_pos
+    i, j = end_pos
+    if @grid[x][y].nil?
       raise "No Piece Selected"
-      # row = 0, column = 9
-    elsif row > 8 || row < 0 || column > 8 || column < 0
-      raise "Cannot move there"
     else
-      @grid[end_pos[0]][end_pos[1]] = @grid[row][column]
-      @grid[row][column] = @@null
+      @grid[x][y].dup.position = [i,j]
+      @grid[i][j] = @grid[x][y]
+      @grid[x][y] = @@null
+
     end
   end
 
@@ -57,15 +57,13 @@ class Board
     i,j = end_pos
     if @grid[x][y].nil?
       raise "No Piece Selected"
-      # row = 0, column = 9
-    elsif i > 8 || i < 0 || j > 8 || j < 0
-      raise "Cannot move there" 
     else
-      piece = self[x,y]
+      piece = self[[x,y]]
       if !piece.valid_moves.include?(end_pos)
         raise "Invalid Move"
       else
-        @grid[end_pos[0]][end_pos[1]] = @grid[x][y]
+        @grid[x][y].position = [i,j]
+        @grid[i][j] = @grid[x][y]
         @grid[x][y] = @@null
       end
     end
@@ -82,7 +80,7 @@ class Board
   end
 
   def duplicate
-    duped = @grid.map {|ele| ele.is_a?(Array) ? dup(ele) : ele}
+    duped = @grid.deep_dup
     return Board.new(duped)
   end
 
@@ -93,12 +91,20 @@ class Board
           piece.moves.each do |pos|
             duped = self.duplicate
             duped.move_piece!(piece.position, pos)
-            return false if !duped.in_check?
+            return false if !duped.in_check?(color)
           end
         end
       end
     end
     true
+  end
+
+  def to_s
+    @grid.each {|row| puts row}
+  end
+
+  def inspect
+    " "
   end
 
   def in_check?(color)
@@ -121,9 +127,15 @@ class Board
   def kings_pos(color)
     @grid.each do |row|
       row.each do |piece|
-        king_pos = piece.position if piece.is_a?(King) && color == piece.symbol 
+        return piece.position if piece.is_a?(King) && color == piece.symbol 
       end
     end
-    king_pos
+  end
+end
+
+
+class Array
+  def deep_dup
+    self.map {|ele| ele.is_a?(Array) ? ele.deep_dup : ele}
   end
 end

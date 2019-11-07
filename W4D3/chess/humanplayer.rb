@@ -8,8 +8,10 @@ class HumanPlayer
 
   def make_move
     begin 
+      turn1 = true
       @display.render
       input1 = @display.get_input
+
       until !input1.nil?
         @display.render
         input1 = @display.get_input
@@ -18,16 +20,17 @@ class HumanPlayer
         puts "wrong side"
         raise ""
       end
+      turn1 = false
       @display.render
-      input2 = display.get_input
-      until !input.nil?
+      input2 = @display.get_input
+      until !input2.nil?
         @display.render
         input2 = @display.get_input
       end
-
       @board.move_piece(input1, input2)
     rescue 
-      @display.select_change
+      @display.select_change if turn1
+
       retry
     end
   end
