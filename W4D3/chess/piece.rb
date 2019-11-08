@@ -1,5 +1,7 @@
 require "singleton"
 
+
+
 module Slideable
   def moves
     x, y = @position[0], @position[1]
@@ -63,16 +65,6 @@ class Piece
   end
 end
 
-class Rook < Piece
-  include Slideable
-  def move_dirs
-    :horizontal
-  end
-  def to_s
-    " R "
-  end
-end
-
 class Queen < Piece
   include Slideable
   def move_dirs
@@ -80,7 +72,11 @@ class Queen < Piece
   end
 
   def to_s
-    " Q "
+    if @symbol == :black
+      " ♛ "
+    else
+      " ♕ "
+    end
   end
 end
 
@@ -91,7 +87,11 @@ class Bishop < Piece
   end
 
   def to_s
-    " B "
+    if @symbol == :black
+      " ♝ "
+    else
+      " ♗ "
+    end
   end
 end
 
@@ -111,9 +111,12 @@ class Knight < Piece
     ]
     moves
   end
-
   def to_s
-    " k "
+    if @symbol == :black
+      " ♞ "
+    else
+      " ♘ "
+    end
   end
 end
 
@@ -135,7 +138,11 @@ class King < Piece
   end
 
   def to_s
-    " K "
+    if @symbol == :black
+      " ♚ "
+    else
+      " ♔ "
+    end
   end
 end
 
@@ -157,6 +164,7 @@ class NullPiece < Piece
   end
 end
 
+
 class Pawn < Piece
 
   def moves
@@ -167,7 +175,11 @@ class Pawn < Piece
   end
 
   def to_s
-    " P "
+    if @symbol == :black
+      " ♟ "
+    else
+      " ♙ " 
+    end
   end
 
   def forward_dir
@@ -209,5 +221,19 @@ class Pawn < Piece
       possible_attacks << [x + dir, y - 1]
     end 
     possible_attacks
+  end
+end
+
+class Rook < Piece
+  include Slideable
+  def move_dirs
+    :horizontal
+  end
+  def to_s
+    if @symbol == :black
+        " ♜ "
+    else
+        " ♖ "
+    end
   end
 end

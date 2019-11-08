@@ -10,10 +10,12 @@ class HumanPlayer
     begin 
       turn1 = true
       @display.render
+      puts "#{@color} move"
       input1 = @display.get_input
 
       until !input1.nil?
         @display.render
+        puts "#{@color} move"
         input1 = @display.get_input
       end
       if @board[input1].symbol != @color
@@ -22,9 +24,11 @@ class HumanPlayer
       end
       turn1 = false
       @display.render
+      puts "#{@color} move"
       input2 = @display.get_input
       until !input2.nil?
         @display.render
+        puts "#{@color} move"
         input2 = @display.get_input
       end
       @board.move_piece(input1, input2)

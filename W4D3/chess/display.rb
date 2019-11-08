@@ -15,9 +15,9 @@ class Display
         bg = :light_red
       end
     elsif (i + j).odd?
-      bg = :light_blue
+      bg = :light_white
     else
-      bg = :blue
+      bg = :light_black
     end
     { background: bg, color: symbol }
   end
