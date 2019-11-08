@@ -23,11 +23,22 @@ class Game
     end
 
     def play
-
+  
     end
 
     def receive_bets
         in_play = @players.dup
         @playy
     end
+
+    def render
+        mapped = @river.map{|card| card.to_s} 
+        puts mapped.join(" ")
+        mapped = @river.map{|card| card.white_space}
+        puts mapped.join(" ")
+        puts mapped.join(" ")
+        mapped = @river.map{|card| card.to_rs}
+        puts mapped.join(" ")
+    end
 end
+
