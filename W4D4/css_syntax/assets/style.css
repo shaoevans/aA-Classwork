@@ -1,0 +1,42 @@
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 38px;
+}
+
+d {}
+
+h2 {
+    font-size: 32px;
+}
+
+.ingredients-list {
+    list-style: square inside;
+}
+
+.directions {
+    list-style: upper-roman;
+}
+
+header > img {
+    width: 100px;
+}
+
+ul > li > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+body {
+    background-color: limegreen;
+}
+
+section > .user_review {
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bolder;
+    text-decoration: underline;
+}
