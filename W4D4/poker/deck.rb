@@ -10,10 +10,11 @@ class Deck
     def populate
         SUITS.each do |suit|
             VALUES.each do |val|
-                @cards << {Cards.new(val, suit)}
+                @cards << Card.new(val, suit)
             end
         end
     end
+    
     def shuffle!
         @cards.shuffle!
     end

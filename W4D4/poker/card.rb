@@ -26,7 +26,11 @@ class Card
     def to_s
         msuit = SUITS[@suit]
         mvalue = VALUES[@value]
-        " #{msuit} #{mvalue} ".colorize(:background => :light_white, color: COLORS[@suit])
+        if mvalue == "10"
+            " #{msuit} #{mvalue}".colorize(:background => :light_white, color: COLORS[@suit])
+        else
+            " #{msuit} #{mvalue} ".colorize(:background => :light_white, color: COLORS[@suit])
+        end
     end
 
     def white_space
@@ -36,7 +40,11 @@ class Card
     def to_rs
         msuit = SUITS[@suit]
         mvalue = VALUES[@value]
-        " #{mvalue} #{msuit} ".colorize(:background => :light_white, color: COLORS[@suit])
+        if mvalue == "10"
+            "#{mvalue} #{msuit} ".colorize(:background => :light_white, color: COLORS[@suit])
+        else
+            " #{mvalue} #{msuit} ".colorize(:background => :light_white, color: COLORS[@suit])
+        end
     end
 end
 
