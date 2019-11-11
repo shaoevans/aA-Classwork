@@ -57,7 +57,7 @@ class Game
         #receive bets
         self.turn 
         #receive bets
-        self.rive
+        self.river
         #receive bets
         #show & compare hands
     end

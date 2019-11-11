@@ -22,5 +22,9 @@ class Deck
     def give_card
         @cards.pop
     end
+
+    def count
+        @cards.length
+    end 
 end
 
