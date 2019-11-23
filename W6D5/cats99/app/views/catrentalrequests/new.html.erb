@@ -1,0 +1,21 @@
+<h1>New Rental</h1>
+<form action="<%=catrentalrequests_url%>" method="POST">
+  <label>Cat ID
+    <select name="catrentalrequest[cat_id]">
+      <option disabled selected>-- Select a Cat --</option>
+      <% Cat.pluck(:id).each do |id|%>
+        <option value="<%=id%>"><%=id%></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+  <label>Start Date
+    <input type="date" name="catrentalrequest[start_date]">
+  </label>
+  <br>
+  <label>End Date
+    <input type="date" name="catrentalrequest[end_date]">
+  </label>
+  <br>
+  <input type="submit" value="Book a cat!">
+</form>

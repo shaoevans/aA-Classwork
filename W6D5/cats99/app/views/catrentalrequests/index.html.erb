@@ -1,0 +1,20 @@
+<%@requests.each do |request|%>
+  <table border="5px black solid", cellpadding="5px">
+      <thead>
+          <tr>
+              <th colspan="2">Booking ID:<%= request.id%></th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Start Date</td>
+          <td><%=request.start_date%></td>
+        </tr>
+        <tr>
+          <td>End Date</td>
+          <td><%=request.end_date%></td>
+        </tr>
+    </tbody>
+  </table>
+  <br>
+<% end%>
