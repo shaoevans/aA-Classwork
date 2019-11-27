@@ -1,0 +1,391 @@
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20191126215446)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar NOT NULL, "password_digest" varchar NOT NULL, "session_token" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191126215446"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-11-26 21:55:56.604716"], ["updated_at", "2019-11-26 21:55:56.604716"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "session_token", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "evans"], ["password_digest", "$2a$12$56cAS6dCABQGs4SDGMRvWuIpyxxlXZDx8rhH8Ioqg6lThKS4WEeNG"], ["session_token", "uuhBgxOVkoy_KYHVWW5gyQ"], ["created_at", "2019-11-26 22:06:20.279391"], ["updated_at", "2019-11-26 22:06:20.279391"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/users/new" for ::1 at 2019-11-26 14:38:30 -0800
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 1.4ms | Allocations: 469)
+[Webpacker] Compiling...
+[Webpacker] Compiled all packs in /Users/evansshao/Desktop/music_app/public/packs
+[Webpacker] Hash: 53154d7baad00c6a1252
+Version: webpack 4.41.2
+Time: 1250ms
+Built at: 11/26/2019 2:38:33 PM
+                                     Asset       Size       Chunks                         Chunk Names
+    js/application-0b67a3cc2fcde6055024.js    124 KiB  application  [emitted] [immutable]  application
+js/application-0b67a3cc2fcde6055024.js.map    139 KiB  application  [emitted] [dev]        application
+                             manifest.json  364 bytes               [emitted]              
+Entrypoint application = js/application-0b67a3cc2fcde6055024.js js/application-0b67a3cc2fcde6055024.js.map
+[./app/javascript/channels sync recursive _channel\.js$] ./app/javascript/channels sync _channel\.js$ 160 bytes {application} [built]
+[./app/javascript/channels/index.js] 211 bytes {application} [built]
+[./app/javascript/packs/application.js] 749 bytes {application} [built]
+[./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 552 bytes {application} [built]
+    + 3 hidden modules
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 2843ms (Views: 2839.2ms | ActiveRecord: 0.4ms | Allocations: 36477)
+
+
+Started POST "/users" for ::1 at 2019-11-26 14:38:45 -0800
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"email"=>"evans123", "password"=>"[FILTERED]"}}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms | Allocations: 976)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/2b798eace10f5a4b/variables" for ::1 at 2019-11-26 14:38:45 -0800
+Started GET "/users/new" for ::1 at 2019-11-26 14:42:48 -0800
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 203)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 11ms (Views: 10.6ms | ActiveRecord: 0.1ms | Allocations: 7613)
+
+
+Started POST "/users" for ::1 at 2019-11-26 14:42:51 -0800
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"ENyVJxeM3lgaOnM/KaI72T7vziotRBQn7Fa0b5SPhjXE+988aZlFJD281/ySgqxTLlhfHSurogW22Qih8UpLIA==", "user"=>{"email"=>"evans123", "password"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "session_token", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "evans123"], ["password_digest", "$2a$12$zrgSy5np2cXwt4ZH8vxZ..vT94XemGcj7jbsqM/8KQq70f6jYd1.W"], ["session_token", "pSXgjNg3yJEgnc9RfHdBeQ"], ["created_at", "2019-11-26 22:42:52.127158"], ["updated_at", "2019-11-26 22:42:52.127158"]]
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "session_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["session_token", "lDVSFP2Dybm74XeXGVktdQ"], ["updated_at", "2019-11-26 22:42:52.130652"], ["id", 2]]
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 209ms (ActiveRecord: 2.6ms | Allocations: 9008)
+
+
+Started GET "/users/2" for ::1 at 2019-11-26 14:42:52 -0800
+
+AbstractController::ActionNotFound - The action 'show' could not be found for UsersController:
+
+Started POST "/__better_errors/b070497704aa449a/variables" for ::1 at 2019-11-26 14:42:52 -0800
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+Started GET "/users/2" for ::1 at 2019-11-26 14:43:46 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+
+SyntaxError - syntax error, unexpected ':', expecting keyword_end
+        render: show
+              ^:
+  app/controllers/users_controller.rb:17:in `'
+
+Started POST "/__better_errors/d830cef4ea86dad9/variables" for ::1 at 2019-11-26 14:43:46 -0800
+Started POST "/users" for ::1 at 2019-11-26 14:43:59 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"authenticity_token"=>"ENyVJxeM3lgaOnM/KaI72T7vziotRBQn7Fa0b5SPhjXE+988aZlFJD281/ySgqxTLlhfHSurogW22Qih8UpLIA==", "user"=>{"email"=>"evans123123", "password"=>"[FILTERED]"}}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "password_digest", "session_token", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "evans123123"], ["password_digest", "$2a$12$KtyfK2GOAMldTkJmQ9HmQe75Y4.fgJ4t9fPUuB2uoSIo7gcxoF0L."], ["session_token", "yEJGC0UHiJeMuSnQcHuGng"], ["created_at", "2019-11-26 22:43:59.727235"], ["updated_at", "2019-11-26 22:43:59.727235"]]
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "session_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["updated_at", "2019-11-26 22:43:59.731013"], ["id", 3]]
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/models/user.rb:18:in `reset_session_token!'
+Redirected to http://localhost:3000/users/3
+Completed 302 Found in 211ms (ActiveRecord: 2.9ms | Allocations: 9680)
+
+
+Started GET "/users/3" for ::1 at 2019-11-26 14:43:59 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 86)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.2ms | Allocations: 7521)
+
+
+Started POST "/session" for ::1 at 2019-11-26 14:44:02 -0800
+Processing by SessionsController#create as HTML
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms | Allocations: 961)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/f6c77aa88298582e/variables" for ::1 at 2019-11-26 14:44:02 -0800
+Started POST "/session" for ::1 at 2019-11-26 14:44:49 -0800
+Processing by SessionsController#create as HTML
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 1ms (ActiveRecord: 0.0ms | Allocations: 958)
+
+
+
+ActionController::InvalidAuthenticityToken - ActionController::InvalidAuthenticityToken:
+
+Started POST "/__better_errors/9bae335341b4dd3d/variables" for ::1 at 2019-11-26 14:44:49 -0800
+Started GET "/users/3" for ::1 at 2019-11-26 14:44:53 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering users/show.html.erb within layouts/application
+  Rendered users/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 81)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 10ms (Views: 9.5ms | ActiveRecord: 0.1ms | Allocations: 7401)
+
+
+Started POST "/session" for ::1 at 2019-11-26 14:44:54 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"QKLwZqzEovC9zkhV6bEA3/2QhSWqpAbrIRkC1t9l2Z+Uhbp90tE5jJpI7JZSkZdV7ScUEqxLsMl7lr4YuqAUig=="}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL AND "users"."password" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.9ms | Allocations: 3080)
+
+
+
+SQLite3::SQLException - no such column: users.password:
+  app/models/user.rb:12:in `find_by_credentials'
+  app/controllers/sessions_controller.rb:7:in `create'
+
+Started POST "/__better_errors/d0c357cf727fc3dd/variables" for ::1 at 2019-11-26 14:44:54 -0800
+Started POST "/session" for ::1 at 2019-11-26 14:46:14 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"QKLwZqzEovC9zkhV6bEA3/2QhSWqpAbrIRkC1t9l2Z+Uhbp90tE5jJpI7JZSkZdV7ScUEqxLsMl7lr4YuqAUig=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms | Allocations: 2233)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 14:46:14 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 205)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.5ms | Allocations: 10964)
+
+
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateBands (20191126224723)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "bands" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_users_on_session_token" ON "users" ("session_token")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191126224723"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/session/new" for ::1 at 2019-11-26 15:01:34 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+
+ActiveRecord::PendingMigrationError - Migrations are pending. To resolve this issue, run:
+
+        rails db:migrate RAILS_ENV=development
+
+:
+
+Started POST "/__better_errors/feafdfa352bd2209/variables" for ::1 at 2019-11-26 15:01:35 -0800
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAlbums (20191126225846)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "albums" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "band_id" integer NOT NULL, "yr" integer NOT NULL, "title" varchar NOT NULL, "type" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191126225846"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/session" for ::1 at 2019-11-26 15:17:57 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"QKLwZqzEovC9zkhV6bEA3/2QhSWqpAbrIRkC1t9l2Z+Uhbp90tE5jJpI7JZSkZdV7ScUEqxLsMl7lr4YuqAUig=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 1945)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:17:57 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 202)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 40ms (Views: 39.1ms | ActiveRecord: 0.2ms | Allocations: 24513)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:04 -0800
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"G6PmJC6uKzs/2DPWiU2+K7laA4H4ryRRxozdzAihZ3DPhKw/ULuwRxhelxUybSmhqe2Stv5AknOcA2ECbWSqZQ=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1078)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:05 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 9ms (Views: 8.6ms | ActiveRecord: 0.2ms | Allocations: 6397)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:06 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"u15oxN1EIKbCMNoHDKZtQCpnfuos25Tho0Xi6SIoA3lveSLfo1G72uW2fsS3hvrKOtDv3So0IsP5yl4nR+3ObA=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1059)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:06 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 68)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.1ms | Allocations: 6387)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:07 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"L5qwF90tOqlvoH/+Zcmbzw+AE6ONg3yGmWMkg/TTBIP7vfoMozih1Ugm2z3e6QxFHzeClItsyqTD7JhNkRbJlg=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1067)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:07 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 10ms (Views: 9.2ms | ActiveRecord: 0.1ms | Allocations: 6376)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:07 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"yeU8xIOxM68WpGP5GZZyuoICJOij2wsESJYA8j62s+odwnbf/aSo0zEixzqituUwkrW136U0vSYSGbw8W3N+/w=="}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.2ms | Allocations: 1069)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:07 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.1ms | Allocations: 6379)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:08 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"Q04lIYGYg+2ayAKtmwxlYdBiEUcAFxJZ7M1qh4ruK0GXaW86/40Ykb1Opm4gLPLrwNWAcAb4pHu2QtZJ7yvmVA=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1059)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:08 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 0.1ms | Allocations: 6375)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:08 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"hEv0gmET7NLsPJYi9bSy4yLfUzo627Te7Z7jyLLih7JQbL6ZHwZ3rsu6MuFOlCVpMmjCDTw0Avy3EV8G1ydKpw=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1066)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:08 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.1ms | Allocations: 6377)
+
+
+Started POST "/session" for ::1 at 2019-11-26 15:40:12 -0800
+Processing by SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"SmLbVyM1slVQfYD6EC599vbJBO6NPhRdXGzlk8x1ADeeRZFMXSApKXf7JDmrDup85n6V2YvRon8G41ldqbDNIg=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `find_by_credentials'
+Redirected to http://localhost:3000/session/new
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 1064)
+
+
+Started GET "/session/new" for ::1 at 2019-11-26 15:40:12 -0800
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 67)
+[Webpacker] Everything's up-to-date. Nothing to do
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = ? LIMIT ?[0m  [["session_token", "H40HbOZb11V0bbcTgfnJYQ"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+Completed 200 OK in 9ms (Views: 8.6ms | ActiveRecord: 0.1ms | Allocations: 6373)
+
+
