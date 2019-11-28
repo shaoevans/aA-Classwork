@@ -1,0 +1,14 @@
+<h1><%= @user.username%></h1>
+<% @user.objectives.each do |obj| %>
+  <ul>
+    <li>
+      <%= obj.title %>
+    </li>
+    <li>
+      <%= obj.body %>
+    </li>
+    <li>
+      <%= obj.cheers.count %>
+    </li>
+  </ul>
+<% end %>
