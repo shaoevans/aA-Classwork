@@ -1,0 +1,52 @@
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.grid li {
+  width: 33.33%;
+  padding-top: 16.67%;
+  padding-bottom: 16.67%;
+  -webkit-box-sizing: border-box;
+  outline: 5px solid black;
+  list-style-type: none;
+  font-weight: bold;
+  font-size: 30px;
+}
+.grid li:hover {
+  background-color: yellow;
+}
+
+
+.unselected {
+  background-color: grey;
+}
+.selected{
+  background-color: white;
+}
+
+.loser {
+  color: red;
+  background-color: white;
+}
+
+.winner {
+  background-color: green;
+  color: white;
+}
+
+.ttt {
+  text-align: center;
+  width: 300px;
+  margin: 0 auto;
+  /* margin-left: 40% */
+}
+
+h1 {
+  text-align: center;
+}
+
+ul {
+  padding-left: 0;
+}

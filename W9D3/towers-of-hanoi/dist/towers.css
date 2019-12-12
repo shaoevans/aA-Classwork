@@ -1,0 +1,52 @@
+.hanoi{
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tower{
+  border-bottom: 20px solid black;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+
+}
+
+.tower:hover {
+  border-bottom: 20px solid blue;
+}
+
+li {
+  color: black;
+  list-style-type: none;
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+}
+
+.disc-1 {
+  width: 33%;
+  border-radius: 20px;
+  background-color: red;
+
+}
+.disc-2 {
+  width: 66%;
+  border-radius: 20px;
+  background-color: yellow;
+
+
+}
+.disc-3 {
+  width: 100%;
+  border-radius: 20px;
+  background-color: limegreen;
+
+}
+
+ul {
+  padding: 10px;
+}
