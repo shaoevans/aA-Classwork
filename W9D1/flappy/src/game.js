@@ -11,22 +11,21 @@ export default class FlappyBird {
     // this.bird = new Bird(this.dimensions);
   }
 
+  registerEvents() {
+    this.boundClickHandler = this.click.bind(this);
+    this.ctx.canvas.addEventListener("mousedown", this.boundClickHandler);
+  }
+
   animate() {
-    while (this.running) {
-      this.level.drawBackground(this.ctx);
-      this.bird.move();
-      this.bird.drawBird(this.ctx);
-      if (this.running) {
-        requestAnimationFrame(animate())
-      }
+    this.level.animate(this.ctx)
+    this.bird.animate(this.ctx)
+    requestAnimationFrame(this.animate.bind(this))
 
-    }
 
-    
   }
 
   click() {
-    this.ctx.addEventListener(mousedown, this)
+
     this.bird.flap();
   }
 

@@ -23,6 +23,11 @@ export default class Bird {
     this.velocity += CONSTANTS.GRAVITY;
   }
 
+  animate(ctx) {
+    this.move();
+    this.drawBird(ctx);
+  }
+
   flap() {
     this.velocity = CONSTANTS.FLAP_SPEED;
   }
