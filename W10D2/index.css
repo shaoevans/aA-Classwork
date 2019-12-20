@@ -1,0 +1,47 @@
+body {
+  font-family: Raleway;
+
+}
+
+.clock {
+  border: 1px solid black;
+  width: 33%;
+  background-color:teal;
+}
+
+.autocomplete {
+  border: 1px solid black;
+  width: 33%;
+  background-color: lightsalmon;
+  padding-top: 30px;
+  padding-left: 10px;
+}
+
+.autocomplete li:hover {
+  cursor: pointer;
+}
+
+.timeString{
+  display: flex;
+  justify-content: space-between;
+  font-size: larger;
+}
+
+.timeString > span {
+  margin: 20px;
+}
+
+.tab-holder {
+  border: 1px solid black;
+  list-style-type: none;
+  width: 33%;
+  background-color: lightgreen;
+}
+
+.tab-holder li {
+  margin: 0;
+}
+
+h1 {
+  color: darkgray
+}
