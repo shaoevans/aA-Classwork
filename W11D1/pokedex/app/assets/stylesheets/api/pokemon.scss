@@ -1,0 +1,45 @@
+// Place all the styles related to the Api::Pokemon controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.img-size {
+  width: 20px;
+  height: auto;
+  margin: 0 10px;
+}
+
+.pokedex-body {
+  width: 25%;
+  height: 800px;
+}
+
+.pokedex-index {
+  width: 300px;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  border: 6px solid black;
+  border-radius: 20px;
+  margin-left: 40px;
+  list-style-type: none;
+  padding: 5px;
+}
+
+.pokedex-index li {
+  
+  border-bottom: 1px solid gray;
+  box-sizing: border-box;
+  padding-top: 5px;
+  width: 100%;
+  padding-left: 10px;
+  height: 40px;
+}
+
+.pokedex-index li:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+html, body {
+  height: 100%;
+}
